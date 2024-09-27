@@ -24,36 +24,36 @@ export function Footer() {
           </h4>
           <ul className="space-y-2">
             <li>
-              <a
-                href="#"
+              <button
                 className="hover:text-blue-400"
+                onClick={() => {/* Add your action here */}}
               >
                 Home
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#"
+              <button
                 className="hover:text-blue-400"
+                onClick={() => {/* Add your action here */}}
               >
                 About
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#"
+              <button
                 className="hover:text-blue-400"
+                onClick={() => {/* Add your action here */}}
               >
                 Pricing
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#"
+              <button
                 className="hover:text-blue-400"
+                onClick={() => {/* Add your action here */}}
               >
                 FAQ's
-              </a>
+              </button>
             </li>
           </ul>
         </div>
