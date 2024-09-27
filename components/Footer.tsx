@@ -52,7 +52,7 @@ export function Footer() {
                 className="hover:text-blue-400"
                 onClick={() => {/* Add your action here */}}
               >
-                FAQ's
+                FAQ&apos;s
               </button>
             </li>
           </ul>

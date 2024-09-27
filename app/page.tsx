@@ -159,7 +159,7 @@ function Expertise() {
       <h2
         className="text-4xl font-bold text-center mb-8 text-white"
       >
-        Explore AgentCoach.ai's Expertise
+        Explore AgentCoach.ai&apos;s Expertise
       </h2>
       <p
         className="text-center text-gray-400 mb-12 max-w-3xl mx-auto"
@@ -200,7 +200,7 @@ function Testimonials() {
       name: "Mike Rodriguez",
       role: "Realtor",
       quote:
-        "The real-time feedback is invaluable. It's like having a mentor in my pocket.",
+        "The real-time feedback is invaluable. It&apos;s like having a mentor in my pocket.",
       avatarUrl: "https://picsum.photos/seed/mike/200/200",
     },
     {
@@ -246,7 +246,7 @@ function Testimonials() {
             <p
               className="text-sm text-center italic"
             >
-              "{testimonial.quote}"
+              &ldquo;{testimonial.quote}&rdquo;
             </p>
           </div>
         ))}
