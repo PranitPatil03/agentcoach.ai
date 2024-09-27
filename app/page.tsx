@@ -1,101 +1,284 @@
-import Image from "next/image";
+"use client"
+
+import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ShootingStarsAndStarsBackgroundDemo } from "@/components/Background";
+
+const TEXTS = [
+  "General Advisor",
+  "Negotiation Expert",
+  "Sales Advisor",
+  "Marketing Guru",
+  "Motivation Guide",
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [index, setIndex] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    const intervalId = setInterval(
+      () => setIndex((index) => (index + 1) % TEXTS.length),
+      3000,
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
+
+  return (
+    <div className="bg-black text-white">
+      <Hero text={TEXTS[index]} />
+      <Features />
+      <Expertise />
+      <Testimonials />
+      <CTA />
+    </div>
+  );
+}
+
+function Hero({ text }: { text: string }) {
+  return (
+    <div className="relative flex flex-col items-center justify-center min-h-screen text-center px-4 bg-gradient-to-b from-black to-blue-900 overflow-hidden">
+      <div className="relative z-10">
+        <p className="text-xl mb-6 text-blue-300">
+          Introducing AI-Powered Coaching for Real Estate Agents
+        </p>
+        <h1
+          className="text-5xl md:text-7xl font-bold mb-8 text-white leading-tight"
+        >
+          Accelerate Your Real Estate Career
+          <br />
+          With Cutting-Edge Generative
+          <br />
+          <span className="text-blue-400">
+            {text}{" "}
+            <span className="text-white">
+              AI Coaching
+            </span>
+          </span>
+        </h1>
+        <Button
+          className="bg-blue-600 hover:bg-blue-700 text-white text-xl py-6 px-8 rounded-full transition-colors"
+        >
+          GET STARTED FREE!
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function Features() {
+  const features = [
+    {
+      title: "Sales Advisor",
+      description:
+        "Boost your property sales with expert tips and proven strategies.",
+      icon: "💬",
+    },
+    {
+      title: "Negotiation Expert",
+      description:
+        "Master the art of negotiation with advice on closing deals.",
+      icon: "🤝",
+    },
+    {
+      title: "Marketing Guru",
+      description:
+        "Elevate your marketing game with creative campaigns and insights.",
+      icon: "📢",
+    },
+    {
+      title: "Motivation Guide",
+      description:
+        "Stay inspired and focused with personalized tips and strategies.",
+      icon: "🎯",
+    },
+    {
+      title: "General Advisor",
+      description:
+        "Get comprehensive advice on various aspects of real estate.",
+      icon: "📊",
+    },
+  ];
+
+  return (
+    <div
+      className="py-8 px-4 bg-gradient-to-b from-blue-900 to-black"
+    >
+      <h2
+        className="text-4xl font-bold text-center mb-12 text-white"
+      >
+        Explore AI Chatbots
+      </h2>
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+      >
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className="bg-black bg-opacity-50 p-6 rounded-lg backdrop-blur-lg"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <div
+              className="text-4xl mb-4 bg-blue-600 w-16 h-16 flex items-center justify-center rounded-full mx-auto"
+            >
+              {feature.icon}
+            </div>
+            <h3
+              className="text-xl font-bold mb-2 text-center"
+            >
+              {feature.title}
+            </h3>
+            <p
+              className="text-sm text-center text-gray-300"
+            >
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div className="text-center mt-12">
+        <Button
+          className="bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors"
+        >
+          TRY IT NOW
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function Expertise() {
+  const prompts = [
+    "How can AI real estate coaching benefit me?",
+    "What legal documents are required for selling a property?",
+    "What are the best practices for cold calling in real estate?",
+    "How can I improve my property listings?",
+    "What are effective negotiation techniques for real estate?",
+    "How do I create a compelling marketing strategy?",
+  ];
+
+  return (
+    <div className="bg-black py-16 px-4">
+      <h2
+        className="text-4xl font-bold text-center mb-8 text-white"
+      >
+        Explore AgentCoach.ai's Expertise
+      </h2>
+      <p
+        className="text-center text-gray-400 mb-12 max-w-3xl mx-auto"
+      >
+        Discover how our AI delivers expert advice on real estate topics.
+      </p>
+      <div
+        className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto"
+      >
+        {prompts.map((prompt, index) => (
+          <div
+            key={index}
+            className="bg-blue-900 text-white p-4 rounded-lg flex items-center justify-between w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]"
+          >
+            <p className="text-sm">
+              {prompt}
+            </p>
+            <span className="ml-2">
+              →
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Testimonials() {
+  const testimonials = [
+    {
+      name: "Lisa Kim",
+      role: "Broker Associate",
+      quote:
+        "I love how convenient it is to access coaching resources at any time!",
+      avatarUrl: "https://picsum.photos/seed/lisa/200/200",
+    },
+    {
+      name: "Mike Rodriguez",
+      role: "Realtor",
+      quote:
+        "The real-time feedback is invaluable. It's like having a mentor in my pocket.",
+      avatarUrl: "https://picsum.photos/seed/mike/200/200",
+    },
+    {
+      name: "Jan Stiedemann",
+      role: "Global Applications Representative",
+      quote:
+        "Agent Coach.ai has revolutionized my approach to negotiations. I feel more confident than ever!",
+      avatarUrl: "https://picsum.photos/seed/jan/200/200",
+    },
+  ];
+
+  return (
+    <div
+      className="bg-gradient-to-b from-black to-blue-900 py-16 px-4"
+    >
+      <h2
+        className="text-4xl font-bold text-center mb-8 text-white"
+      >
+        What Users Say About Agent Coach.ai
+      </h2>
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+      >
+        {testimonials.map((testimonial, index) => (
+          <div
+            key={index}
+            className="bg-black bg-opacity-50 p-6 rounded-lg backdrop-blur-lg"
+          >
+            <img
+              src={testimonial.avatarUrl}
+              alt={testimonial.name}
+              className="w-20 h-20 rounded-full mx-auto mb-4"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+            <h3 className="font-bold text-center">
+              {testimonial.name}
+            </h3>
+            <p
+              className="text-sm text-blue-300 text-center mb-4"
+            >
+              {testimonial.role}
+            </p>
+            <p
+              className="text-sm text-center italic"
+            >
+              "{testimonial.quote}"
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CTA() {
+  return (
+    <div
+      className="bg-blue-900 text-white py-16 px-4"
+    >
+      <div
+        className="max-w-5xl mx-auto text-center"
+      >
+        <h2 className="text-4xl font-bold mb-8">
+          Start Transforming Your Real Estate Career Today - For Free!
+        </h2>
+        <p
+          className="text-blue-200 mb-12 max-w-3xl mx-auto"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Unlock expert AI-driven advice for real estate, sales, and
+          negotiation. Get started for free and elevate your career today!
+        </p>
+        <Button
+          className="bg-white text-blue-900 hover:bg-blue-100 text-xl py-6 px-8 rounded-full transition-colors"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          SIGN UP FOR FREE & UNLOCK YOUR POTENTIAL TODAY!
+        </Button>
+      </div>
     </div>
   );
 }
